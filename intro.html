@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>thariq-html-output · Lenses, not buckets / 镜头，而非分桶</title>
+<meta name="description" content="一个领会了 Thariq Shihipar《HTML 的惊人有效性》之精神的 Claude 技能。它把分类当作半透明、可叠加的镜头：先感知内容的形状，再透过每一面合用的镜头去构建——也同样清楚何时根本不该用 HTML。"/>
+<meta property="og:title" content="镜头，而非分桶 · Lenses, not buckets"/>
+<meta property="og:description" content="桶是不透明、互相隔离的；镜头是半透明、可叠加的。一个把 Thariq 的洞察操作化、又不背离其分寸的 Claude 技能。"/>
+<style>
+:root {
+  --bg: #f7f6f1; --surface: #fffefb; --surface-2: #efece3;
+  --ink: #1b1b1a; --ink-soft: #54534e; --ink-mute: #8b8a82;
+  --rule: #e4e1d7; --rule-strong: #d2cec1;
+  --accent: #0d7a6e; --accent-soft: #0d7a6e;
+  /* 镜头色相——仅在「组合」演示里承载含义 */
+  --l-skeleton: #0d7a6e;  /* 探索 / 骨架 */
+  --l-figure:   #b06d1d;  /* 插图 */
+  --l-design:   #a63a5b;  /* 设计 */
+  --l-code:     #3a5694;  /* 代码审查 */
+  --serif: "Iowan Old Style", Charter, "Source Serif 4", "Songti SC", ui-serif, Georgia, serif;
+  --sans: Inter, "PingFang SC", "Microsoft YaHei", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --mono: ui-monospace, "JetBrains Mono", "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #100f0d; --surface: #181715; --surface-2: #211f1c;
+    --ink: #f0efe9; --ink-soft: #aba99f; --ink-mute: #706e64;
+    --rule: #2a2825; --rule-strong: #3a3833;
+    --accent: #4ec8b8; --accent-soft: #4ec8b8;
+    --l-skeleton: #4ec8b8; --l-figure: #e0a44a; --l-design: #e0738f; --l-code: #7e9be0;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+html, body { background: var(--bg); color: var(--ink); margin: 0; }
+body { font: 18px/1.72 var(--serif); -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); }
+a:hover { border-bottom-color: var(--accent); }
+code { font: .88em var(--mono); padding: 1px 5px; background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; }
+em { font-style: italic; }
+.wrap { max-width: 940px; margin: 0 auto; padding: 0 1.6rem; }
+
+/* 语言切换 i18n */
+body[data-lang="zh"] [lang="en"] { display: none !important; }
+body[data-lang="en"] [lang="zh"] { display: none !important; }
+
+.eyebrow { font: 600 12px var(--sans); text-transform: uppercase; letter-spacing: .16em; color: var(--accent); }
+.section-k { font: 600 11px var(--sans); text-transform: uppercase; letter-spacing: .15em; color: var(--ink-mute); margin: 0 0 1.4em; }
+
+/* 顶栏 */
+.bar { font: 12px var(--mono); color: var(--ink-mute); }
+.bar .wrap { display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; padding-bottom: 1rem; gap: 1em; flex-wrap: wrap; }
+.bar a { color: var(--ink-soft); border-bottom-color: var(--rule); }
+.bar a:hover { color: var(--accent); }
+.bar .right { display: flex; align-items: center; gap: 1.2em; flex-wrap: wrap; }
+.langtoggle { font: 12px var(--mono); color: var(--ink-soft); background: none; border: 1px solid var(--rule-strong); border-radius: 4px; padding: .25em .7em; cursor: pointer; line-height: 1; }
+.langtoggle:hover { color: var(--accent); border-color: var(--accent); }
+
+/* 英雄区 */
+.hero { padding: 4.5rem 0 3.5rem; display: grid; grid-template-columns: 1fr auto; gap: 2.5rem; align-items: center; }
+@media (max-width: 760px) { .hero { grid-template-columns: 1fr; gap: 2rem; } }
+.hero .eyebrow { margin-bottom: 1.6em; display: block; }
+.hero .eyebrow a { color: inherit; border-bottom-color: color-mix(in srgb, var(--accent) 25%, transparent); }
+.hero h1 { font: 600 clamp(2.3rem, 6.5vmin, 3.5rem)/1.14 var(--serif); letter-spacing: -.015em; margin: 0 0 .55em; max-width: 14ch; }
+.hero h1 em { color: var(--accent); }
+.hero .lead { font-size: 1.16rem; line-height: 1.65; color: var(--ink-soft); max-width: 36em; margin: 0; }
+.hero .lead em { color: var(--ink); }
+.hero .self { margin-top: 1.6em; font: 13.5px/1.6 var(--sans); color: var(--ink-mute); max-width: 34em; }
+.hero .mark { width: 220px; height: 220px; }
+@media (max-width: 760px) { .hero .mark { width: 150px; height: 150px; } }
+
+/* 大段陈述（识别测试） */
+.statement { padding: 3.5rem 0; border-top: 1px solid var(--rule); }
+.statement .q { font: 500 clamp(1.5rem, 3.4vmin, 2.05rem)/1.4 var(--serif); letter-spacing: -.01em; margin: 0; max-width: 24ch; }
+.statement .q .hl { color: var(--accent); font-style: italic; }
+.statement .gloss { margin-top: 1.8em; display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem 2.4rem; max-width: 760px; }
+@media (max-width: 640px) { .statement .gloss { grid-template-columns: 1fr; } }
+.statement .gloss p { margin: 0; font-size: 1rem; line-height: 1.65; color: var(--ink-soft); }
+.statement .gloss p b { color: var(--ink); font-weight: 600; }
+
+/* 九面镜头 */
+.lenses { padding: 3.5rem 0; border-top: 1px solid var(--rule); }
+.lenses h2 { font: 600 1.5rem/1.2 var(--serif); margin: 0 0 .3em; letter-spacing: -.01em; }
+.lenses .sub { color: var(--ink-soft); margin: 0 0 2.2rem; max-width: 40em; }
+.lens-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem 2.8rem; }
+@media (max-width: 720px) { .lens-list { grid-template-columns: 1fr; } }
+.lens { display: grid; grid-template-columns: 40px 1fr; gap: 1rem; align-items: start; }
+.lens .glass { width: 38px; height: 38px; margin-top: 2px; }
+.lens .body .name { font: 600 1.02rem var(--serif); margin: 0 0 .15em; display: flex; align-items: baseline; gap: .5em; }
+.lens .body .name .id { font: 500 10px var(--mono); color: var(--ink-mute); letter-spacing: .02em; }
+.lens .body blockquote { margin: .3em 0 0; font: italic .94rem/1.5 var(--serif); color: var(--ink); }
+.lens .body .zh { margin: .35em 0 0; font: 13px/1.55 var(--sans); color: var(--ink-mute); }
+
+/* 组合演示——核心 */
+.compose { padding: 4rem 0; border-top: 1px solid var(--rule); }
+.compose h2 { font: 600 1.7rem/1.2 var(--serif); margin: 0 0 .35em; letter-spacing: -.012em; }
+.compose .sub { color: var(--ink-soft); margin: 0 0 1.4rem; max-width: 42em; }
+.compose .quote { font: italic 1.06rem/1.6 var(--serif); color: var(--ink); border-left: 2px solid var(--rule-strong); padding-left: 1.1em; margin: 0 0 2.4rem; max-width: 44em; }
+.compose .quote .cite { display: block; font: 13px var(--sans); color: var(--ink-mute); font-style: normal; margin-top: .55em; }
+.compose .stage { display: grid; grid-template-columns: 1fr; place-items: center; padding: 1rem 0 .5rem; }
+.compose svg.stack { width: 100%; max-width: 720px; height: auto; }
+.compose .read { margin: 1.8rem auto 0; max-width: 44em; font-size: 1rem; line-height: 1.68; color: var(--ink-soft); }
+.compose .read b { color: var(--ink); font-weight: 600; }
+.compose .read .tag { color: var(--accent); font-weight: 600; font-style: italic; }
+
+/* 轻触哲学 */
+.touch { padding: 4rem 0; border-top: 1px solid var(--rule); }
+.touch .grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: start; }
+@media (max-width: 760px) { .touch .grid { grid-template-columns: 1fr; gap: 2rem; } }
+.touch blockquote { margin: 0; padding: 0 0 0 1.3em; border-left: 3px solid var(--accent); }
+.touch blockquote p { font: italic 1.35rem/1.45 var(--serif); color: var(--ink); margin: 0; }
+.touch blockquote .zh { display: block; font: italic 1.02rem/1.6 var(--serif); color: var(--ink-soft); margin-top: .6em; }
+.touch blockquote cite { display: block; font: 13px var(--sans); color: var(--ink-mute); font-style: normal; margin-top: .9em; }
+.touch .body p { margin: 0 0 1.1em; color: var(--ink-soft); line-height: 1.7; }
+.touch .body p:last-child { margin-bottom: 0; }
+.touch .body p b { color: var(--ink); font-weight: 600; }
+.touch .body em { color: var(--ink); }
+
+/* 配得上被读 */
+.qualities { padding: 3.5rem 0; border-top: 1px solid var(--rule); }
+.qualities h2 { font: 600 1.5rem/1.2 var(--serif); margin: 0 0 .3em; letter-spacing: -.01em; }
+.qualities .sub { color: var(--ink-soft); margin: 0 0 2rem; max-width: 42em; }
+.q-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.3rem 2.6rem; counter-reset: q; }
+@media (max-width: 640px) { .q-list { grid-template-columns: 1fr; } }
+.q-item { display: grid; grid-template-columns: auto 1fr; gap: .9em; align-items: baseline; }
+.q-item .n { font: 600 12px var(--mono); color: var(--accent); padding-top: .15em; }
+.q-item .t b { font: 600 1rem var(--serif); color: var(--ink); }
+.q-item .t span { display: block; font-size: .94rem; color: var(--ink-soft); line-height: 1.55; margin-top: .15em; }
+
+/* 用起来 */
+.use { padding: 3.5rem 0 1rem; border-top: 1px solid var(--rule); }
+.use h2 { font: 600 1.5rem/1.2 var(--serif); margin: 0 0 1.4rem; letter-spacing: -.01em; }
+.use .struct { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 1.2rem 1.4rem; margin-bottom: 1.4rem; overflow-x: auto; }
+.use .struct pre { margin: 0; font: 12.5px/1.7 var(--mono); color: var(--ink-soft); }
+.use .struct pre b { color: var(--accent); font-weight: 600; }
+.use .struct pre .c { color: var(--ink-mute); }
+.use .two { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+@media (max-width: 720px) { .use .two { grid-template-columns: 1fr; } }
+.use .card { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 1.2rem 1.4rem; }
+.use .card .t { font: 600 11px var(--sans); text-transform: uppercase; letter-spacing: .1em; color: var(--accent); margin-bottom: .6em; }
+.use .card h3 { margin: 0 0 .7em; font-size: 1.04rem; font-weight: 600; }
+.use .card ol, .use .card ul { margin: 0; padding-left: 1.2em; font-size: .95rem; line-height: 1.65; color: var(--ink-soft); }
+.use .card pre { background: var(--bg); border: 1px solid var(--rule); border-radius: 4px; padding: .8em 1em; margin: .9em 0 0; font: 12px/1.55 var(--mono); color: var(--ink); overflow-x: auto; }
+
+/* 页脚 */
+footer { margin-top: 3rem; padding: 2.4rem 0 3rem; border-top: 1px solid var(--rule); font: 13.5px/1.65 var(--sans); color: var(--ink-mute); }
+footer .wrap { display: flex; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; align-items: baseline; }
+footer a { color: var(--ink-soft); border-bottom-color: var(--rule); }
+footer a:hover { color: var(--accent); }
+footer .links { display: flex; gap: 1.3em; flex-wrap: wrap; }
+</style>
+</head>
+<body data-lang="zh">
+
+<!-- 顶栏 -->
+<div class="bar">
+  <div class="wrap">
+    <span>thariq-html-output</span>
+    <span class="right">
+      <span lang="zh">缘起 · <a href="https://thariqs.github.io/html-effectiveness/">Thariq 的《HTML 的惊人有效性》</a></span>
+      <span lang="en">Origin · <a href="https://thariqs.github.io/html-effectiveness/">Thariq's <em>The Unreasonable Effectiveness of HTML</em></a></span>
+      <button class="langtoggle" data-toggle-lang type="button" aria-label="切换语言 / Switch language"><span lang="zh">EN</span><span lang="en">中文</span></button>
+    </span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- 英雄区 -->
+<header class="hero">
+  <div>
+    <span class="eyebrow" lang="zh">一个 Claude 技能 · 源自 <a href="https://thariqs.github.io/html-effectiveness/">Thariq Shihipar 的论点</a></span>
+    <span class="eyebrow" lang="en">A Claude skill · built on <a href="https://thariqs.github.io/html-effectiveness/">Thariq Shihipar's argument</a></span>
+    <h1 lang="zh">镜头，<br>而非<em>分桶</em>。</h1>
+    <h1 lang="en">Lenses,<br>not <em>buckets</em>.</h1>
+    <p class="lead" lang="zh">桶是不透明、互相隔离的；镜头是<em>半透明、可叠加</em>的。这个技能不把请求塞进某一个类别，而是先感知它的形状，再透过<em>每一面</em>合用的镜头去构建。它同样在意 Thariq 最在意的那件事——<em>知道何时根本不该用 HTML</em>。</p>
+    <p class="lead" lang="en">Buckets are opaque and walled off from each other; lenses are <em>translucent and stackable</em>. This skill doesn't file a request into one category — it perceives its shape first, then builds through <em>every</em> lens that fits. It cares just as much about the thing Thariq cared about most — <em>knowing when not to reach for HTML at all</em>.</p>
+    <p class="self" lang="zh">本页面本身就是一个产物：单个自包含的 <code>.html</code>，离线可用，色彩只在承载意义处出现。技能要求的，它都守住了。</p>
+    <p class="self" lang="en">This page is itself an artifact: a single self-contained <code>.html</code>, works offline, color only where it carries meaning. Everything the skill asks for, it holds to.</p>
+  </div>
+  <svg class="mark" viewBox="0 0 200 200" role="img" aria-label="三面叠合的镜片 / three stacked lenses">
+    <defs>
+      <radialGradient id="g1" cx="40%" cy="38%" r="62%">
+        <stop offset="0%" stop-color="var(--accent)" stop-opacity=".05"/>
+        <stop offset="100%" stop-color="var(--accent)" stop-opacity=".26"/>
+      </radialGradient>
+    </defs>
+    <circle cx="78"  cy="76"  r="58" fill="url(#g1)" stroke="var(--accent)" stroke-opacity=".5" stroke-width="1"/>
+    <circle cx="124" cy="86"  r="58" fill="url(#g1)" stroke="var(--accent)" stroke-opacity=".5" stroke-width="1"/>
+    <circle cx="100" cy="124" r="58" fill="url(#g1)" stroke="var(--accent)" stroke-opacity=".5" stroke-width="1"/>
+  </svg>
+</header>
+
+<!-- 识别测试 -->
+<section class="statement">
+  <p class="section-k" lang="zh">触发：一种感知，而非关键词匹配</p>
+  <p class="section-k" lang="en">Triggering: a perception, not a keyword match</p>
+  <p class="q" lang="zh">我即将写的东西，是否有一个会被线性文本<span class="hl">压平</span>的形状——读者会「扫一眼」它的 Markdown 版，但会「<span class="hl">真正阅读</span>」它的 HTML 版吗？</p>
+  <p class="q" lang="en">Does the thing I'm about to write have a shape that linear text would <span class="hl">flatten</span> — would the reader "skim" a markdown version but "<span class="hl">actually read</span>" an HTML one?</p>
+  <div class="gloss">
+    <p lang="zh">整篇文章都围绕这一个问题展开。所以触发器问的是一种<b>感知</b>——而非「请求里有没有出现『报告』这个词」。九面镜头在这里是给你所见形状<b>命名</b>的词汇表，不是一张你必须匹配其中一行的路由表。</p>
+    <p lang="en">The whole post turns on this one question. So the trigger asks about a <b>perception</b> — not "does the request contain the word <em>report</em>." The nine lenses are a vocabulary for <b>naming</b> the shape you saw, not a routing table you match one row of.</p>
+    <p lang="zh">若答案确实为否——它只是一句话、一段代码、一条命令——那就保持 Markdown。一个把<b>每条</b>提示词都转成 HTML 的技能，恰恰是 Thariq 所担忧的那个东西。</p>
+    <p lang="en">If the answer really is no — it's a single sentence, a snippet, one command — then stay in markdown. A skill that turns <b>every</b> prompt into HTML is exactly the thing Thariq worried about.</p>
+  </div>
+</section>
+
+<!-- 九面镜头 -->
+<section class="lenses">
+  <h2 lang="zh">九面镜头</h2>
+  <h2 lang="en">Nine lenses</h2>
+  <p class="sub" lang="zh">九面镜头，每一面对应一种内容的形状。把九种分开、而不揉成更少几类，本身就是一种判断——不同的形状值得不同的看法。镜片上那句话，是 Thariq 一眼看穿这种形状的观察；你构建时先得认出形状，这些话帮你认。</p>
+  <p class="sub" lang="en">Nine lenses, each for one shape of content. Keeping the nine distinct rather than collapsing them into fewer is itself a judgment — different shapes deserve different ways of looking. The line on each lens is Thariq's own observation that sees through that shape; you have to recognize the shape before you build, and these help you recognize it.</p>
+  <div class="lens-list">
+
+    <div class="lens">
+      <svg class="glass" viewBox="0 0 38 38" aria-hidden="true"><circle cx="16" cy="15" r="13" fill="var(--accent)" fill-opacity=".14" stroke="var(--accent)" stroke-opacity=".55"/><path d="M25 24 L33 32" stroke="var(--accent)" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"/></svg>
+      <div class="body">
+        <p class="name" lang="zh">探索与规划 <span class="id">01</span></p>
+        <p class="name" lang="en">Exploration &amp; Planning <span class="id">01</span></p>
+        <blockquote>"…fan out across several directions and lay them next to each other so you can point at one…"</blockquote>
+        <p class="zh" lang="zh">向几个方向铺开、并排摆放，让你指着其中一个——而非把三面文字墙都装进脑子。</p>
+      </div>
+    </div>
+
+    <div class="lens">
+      <svg class="glass" viewBox="0 0 38 38" aria-hidden="true"><circle cx="16" cy="15" r="13" fill="var(--accent)" fill-opacity=".14" stroke="var(--accent)" stroke-opacity=".55"/><path d="M25 24 L33 32" stroke="var(--accent)" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"/></svg>
+      <div class="body">
+        <p class="name" lang="zh">代码审查与理解 <span class="id">02</span></p>
+        <p class="name" lang="en">Code Review &amp; Understanding <span class="id">02</span></p>
+        <blockquote>"Diffs and call-graphs are spatial information; markdown flattens them."</blockquote>
+        <p class="zh" lang="zh">差异与调用图是空间信息；Markdown 会把它们压平。</p>
+      </div>
+    </div>
+
+    <div class="lens">
+      <svg class="glass" viewBox="0 0 38 38" aria-hidden="true"><circle cx="16" cy="15" r="13" fill="var(--accent)" fill-opacity=".14" stroke="var(--accent)" stroke-opacity=".55"/><path d="M25 24 L33 32" stroke="var(--accent)" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"/></svg>
+      <div class="body">
+        <p class="name" lang="zh">设计 <span class="id">03</span></p>
+        <p class="name" lang="en">Design <span class="id">03</span></p>
+        <blockquote>"HTML <em>is</em> the medium your design system ships in…"</blockquote>
+        <p class="zh" lang="zh">HTML 本身就是设计系统交付的媒介，所以是谈论它的天然格式。</p>
+      </div>
+    </div>
+
+    <div class="lens">
+      <svg class="glass" viewBox="0 0 38 38" aria-hidden="true"><circle cx="16" cy="15" r="13" fill="var(--accent)" fill-opacity=".14" stroke="var(--accent)" stroke-opacity=".55"/><path d="M25 24 L33 32" stroke="var(--accent)" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"/></svg>
+      <div class="body">
+        <p class="name" lang="zh">原型 <span class="id">04</span></p>
+        <p class="name" lang="en">Prototyping <span class="id">04</span></p>
+        <blockquote>"Motion and interaction can't be described, only felt."</blockquote>
+        <p class="zh" lang="zh">动效与交互无法被描述，只能被感受。</p>
+      </div>
+    </div>
+
+    <div class="lens">
+      <svg class="glass" viewBox="0 0 38 38" aria-hidden="true"><circle cx="16" cy="15" r="13" fill="var(--accent)" fill-opacity=".14" stroke="var(--accent)" stroke-opacity=".55"/><path d="M25 24 L33 32" stroke="var(--accent)" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"/></svg>
+      <div class="body">
+        <p class="name" lang="zh">插图与图表 <span class="id">05</span></p>
+        <p class="name" lang="en">Illustrations &amp; Diagrams <span class="id">05</span></p>
+        <blockquote>"Inline SVG gives the agent a real pen."</blockquote>
+        <p class="zh" lang="zh">内联 SVG 给了智能体一支真正的笔。</p>
+      </div>
+    </div>
+
+    <div class="lens">
+      <svg class="glass" viewBox="0 0 38 38" aria-hidden="true"><circle cx="16" cy="15" r="13" fill="var(--accent)" fill-opacity=".14" stroke="var(--accent)" stroke-opacity=".55"/><path d="M25 24 L33 32" stroke="var(--accent)" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"/></svg>
+      <div class="body">
+        <p class="name" lang="zh">幻灯片 <span class="id">06</span></p>
+        <p class="name" lang="en">Decks <span class="id">06</span></p>
+        <blockquote>"A handful of <code>&lt;section&gt;</code> tags and twenty lines of JS is a slide deck."</blockquote>
+        <p class="zh" lang="zh">几个 <code>&lt;section&gt;</code> 标签加二十行 JS 就是一套幻灯片。</p>
+      </div>
+    </div>
+
+    <div class="lens">
+      <svg class="glass" viewBox="0 0 38 38" aria-hidden="true"><circle cx="16" cy="15" r="13" fill="var(--accent)" fill-opacity=".14" stroke="var(--accent)" stroke-opacity=".55"/><path d="M25 24 L33 32" stroke="var(--accent)" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"/></svg>
+      <div class="body">
+        <p class="name" lang="zh">研究与学习 <span class="id">07</span></p>
+        <p class="name" lang="en">Research &amp; Learning <span class="id">07</span></p>
+        <blockquote>"…the scaffolding that makes a new topic navigable."</blockquote>
+        <p class="zh" lang="zh">智能体可以搭出那层脚手架，让一个新主题变得可浏览。</p>
+      </div>
+    </div>
+
+    <div class="lens">
+      <svg class="glass" viewBox="0 0 38 38" aria-hidden="true"><circle cx="16" cy="15" r="13" fill="var(--accent)" fill-opacity=".14" stroke="var(--accent)" stroke-opacity=".55"/><path d="M25 24 L33 32" stroke="var(--accent)" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"/></svg>
+      <div class="body">
+        <p class="name" lang="zh">报告 <span class="id">08</span></p>
+        <p class="name" lang="en">Reports <span class="id">08</span></p>
+        <blockquote>"A small chart and a colored timeline turn something people skim into something they actually read."</blockquote>
+        <p class="zh" lang="zh">一张小图和一条带色的时间轴，把人们略读的变成真正阅读的。</p>
+      </div>
+    </div>
+
+    <div class="lens">
+      <svg class="glass" viewBox="0 0 38 38" aria-hidden="true"><circle cx="16" cy="15" r="13" fill="var(--accent)" fill-opacity=".14" stroke="var(--accent)" stroke-opacity=".55"/><path d="M25 24 L33 32" stroke="var(--accent)" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"/></svg>
+      <div class="body">
+        <p class="name" lang="zh">自定义编辑界面 <span class="id">09</span></p>
+        <p class="name" lang="en">Custom Editing Interfaces <span class="id">09</span></p>
+        <blockquote>"…always end with an export button… the loop gets tighter."</blockquote>
+        <p class="zh" lang="zh">永远以导出按钮收尾。你始终在闭环之中；而闭环会收得更紧。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 组合演示——核心 -->
+<section class="compose">
+  <h2 lang="zh">镜头会叠合</h2>
+  <h2 lang="en">Lenses stack</h2>
+  <p class="sub" lang="zh">这是整个技能的核心，也是 Thariq 自己的设计。看他对<em>实施计划</em>这个 demo 的描述——它表面是一个类别，实则同时是四面镜头叠在一起：</p>
+  <p class="sub" lang="en">This is the heart of the whole skill, and Thariq's own design. Look at how he describes the <em>implementation plan</em> demo — on the surface one category, in truth four lenses stacked at once:</p>
+  <blockquote class="quote">
+    "Milestones on a timeline, a data-flow diagram, inline mockups, the risky code, and a risk table — the plan you hand off."
+    <span class="cite" lang="zh">—— Thariq，描述「实施计划」demo</span>
+    <span class="cite" lang="en">— Thariq, describing the "implementation plan" demo</span>
+  </blockquote>
+
+  <div class="stage">
+    <svg class="stack" viewBox="0 0 720 360" role="img" aria-labelledby="stack-title">
+      <title id="stack-title" lang="zh">一个实施计划产物，由四面半透明镜头叠合而成</title>
+      <title id="stack-title-en" lang="en">An implementation-plan artifact, four translucent lenses stacked</title>
+
+      <!-- 四片叠合的镜片（半透明，重叠处色彩加深） -->
+      <!-- 探索 / 骨架 -->
+      <polygon points="240,52 390,98 240,144 90,98" fill="var(--l-skeleton)" fill-opacity=".22" stroke="var(--l-skeleton)" stroke-opacity=".7" stroke-width="1.2"/>
+      <line x1="390" y1="98" x2="470" y2="98" stroke="var(--l-skeleton)" stroke-opacity=".5" stroke-width="1"/>
+      <text x="478" y="93" font-family="var(--sans)" font-size="14" font-weight="600" fill="var(--ink)" lang="zh">探索与规划 · 骨架</text>
+      <text x="478" y="93" font-family="var(--sans)" font-size="14" font-weight="600" fill="var(--ink)" lang="en">Exploration &amp; Planning · skeleton</text>
+      <text x="478" y="111" font-family="var(--serif)" font-size="13" fill="var(--ink-soft)" lang="zh">时间轴上的里程碑</text>
+      <text x="478" y="111" font-family="var(--serif)" font-size="13" fill="var(--ink-soft)" lang="en">Milestones on a timeline</text>
+
+      <!-- 插图 -->
+      <polygon points="240,112 390,158 240,204 90,158" fill="var(--l-figure)" fill-opacity=".22" stroke="var(--l-figure)" stroke-opacity=".7" stroke-width="1.2"/>
+      <line x1="390" y1="158" x2="470" y2="158" stroke="var(--l-figure)" stroke-opacity=".5" stroke-width="1"/>
+      <text x="478" y="153" font-family="var(--sans)" font-size="14" font-weight="600" fill="var(--ink)" lang="zh">插图与图表</text>
+      <text x="478" y="153" font-family="var(--sans)" font-size="14" font-weight="600" fill="var(--ink)" lang="en">Illustrations &amp; Diagrams</text>
+      <text x="478" y="171" font-family="var(--serif)" font-size="13" fill="var(--ink-soft)" lang="zh">一张数据流图（内联 SVG）</text>
+      <text x="478" y="171" font-family="var(--serif)" font-size="13" fill="var(--ink-soft)" lang="en">A data-flow diagram (inline SVG)</text>
+
+      <!-- 设计 -->
+      <polygon points="240,172 390,218 240,264 90,218" fill="var(--l-design)" fill-opacity=".22" stroke="var(--l-design)" stroke-opacity=".7" stroke-width="1.2"/>
+      <line x1="390" y1="218" x2="470" y2="218" stroke="var(--l-design)" stroke-opacity=".5" stroke-width="1"/>
+      <text x="478" y="213" font-family="var(--sans)" font-size="14" font-weight="600" fill="var(--ink)" lang="zh">设计</text>
+      <text x="478" y="213" font-family="var(--sans)" font-size="14" font-weight="600" fill="var(--ink)" lang="en">Design</text>
+      <text x="478" y="231" font-family="var(--serif)" font-size="13" fill="var(--ink-soft)" lang="zh">内联原型</text>
+      <text x="478" y="231" font-family="var(--serif)" font-size="13" fill="var(--ink-soft)" lang="en">Inline mockups</text>
+
+      <!-- 代码审查 -->
+      <polygon points="240,232 390,278 240,324 90,278" fill="var(--l-code)" fill-opacity=".22" stroke="var(--l-code)" stroke-opacity=".7" stroke-width="1.2"/>
+      <line x1="390" y1="278" x2="470" y2="278" stroke="var(--l-code)" stroke-opacity=".5" stroke-width="1"/>
+      <text x="478" y="273" font-family="var(--sans)" font-size="14" font-weight="600" fill="var(--ink)" lang="zh">代码审查</text>
+      <text x="478" y="273" font-family="var(--sans)" font-size="14" font-weight="600" fill="var(--ink)" lang="en">Code Review</text>
+      <text x="478" y="291" font-family="var(--serif)" font-size="13" fill="var(--ink-soft)" lang="zh">关键代码 + 风险表</text>
+      <text x="478" y="291" font-family="var(--serif)" font-size="13" fill="var(--ink-soft)" lang="en">The risky code + a risk table</text>
+
+      <!-- 左侧合并标注 -->
+      <line x1="62" y1="98" x2="62" y2="278" stroke="var(--ink-mute)" stroke-opacity=".4" stroke-width="1"/>
+      <text x="54" y="194" font-family="var(--sans)" font-size="12" fill="var(--ink-mute)" text-anchor="end" transform="rotate(-90 54 194)" lang="zh">一个交付物 · implementation-plan.html</text>
+      <text x="54" y="194" font-family="var(--sans)" font-size="12" fill="var(--ink-mute)" text-anchor="end" transform="rotate(-90 54 194)" lang="en">One deliverable · implementation-plan.html</text>
+    </svg>
+  </div>
+
+  <p class="read" lang="zh"><b>构建逻辑很简单：</b><span class="tag">数出</span>所有合用的镜头 → 读取每个被点名的参考文件 → 让主导镜头（这里是「探索」）确定<b>骨架</b>，其余镜头在骨架内贡献各自的层。拿不准时，<b>多透过几面镜头，而非更少</b>。重叠的地方色彩加深——那正是 Thariq 那些最好的例子获得密度的方式。</p>
+  <p class="read" lang="en"><b>The build logic is simple:</b> <span class="tag">count</span> every lens that fits → read each named reference → let the dominant lens (here, Exploration) set the <b>skeleton</b>, and the others contribute their layers inside it. When unsure, look through <b>more lenses, not fewer</b>. Where they overlap the color deepens — that's how Thariq's best examples get their density.</p>
+</section>
+
+<!-- 轻触哲学 -->
+<section class="touch">
+  <p class="section-k" lang="zh">他的顾虑，就是我们的设计</p>
+  <p class="section-k" lang="en">His worry is our design brief</p>
+  <div class="grid">
+    <blockquote>
+      <p>"you don't need to do much to get Claude to do this."</p>
+      <span class="zh" lang="zh">「你并不需要做太多，就能让 Claude 实现这一点。」</span>
+      <cite>—— Thariq Shihipar</cite>
+    </blockquote>
+    <div class="body">
+      <p lang="zh">Thariq 在原文里直言，他担心有人把这篇文章<b>变成一个机械的 /html 技能</b>。那样的技能会抹掉他真正在乎的东西——<em>判断力</em>：何时该用，何时该放手。</p>
+      <p lang="en">In the post itself Thariq says he worried someone would <b>turn it into a mechanical /html skill</b>. Such a skill would erase the thing he actually cared about — <em>judgment</em>: when to reach for it, and when to leave it alone.</p>
+      <p lang="zh">所以对这篇文章最深的领会，不是逐条照搬它，而是<b>不把它做成一本规则手册</b>。这个技能宁可是最小的脚手架——给出框架和例子，然后<em>让开</em>，<b>信任模型</b>自己看出每个产物想要成为的样子。原文给的本就是例子，而非规则。</p>
+      <p lang="en">So the deepest reading of the post is not to copy it line by line, but to <b>not turn it into a rulebook</b>. This skill would rather be the smallest scaffolding — give framing and examples, then <em>get out of the way</em> and <b>trust the model</b> to see what each artifact wants to be. The post gave examples, not rules.</p>
+      <p lang="zh">它不是「总是用 HTML 回答」。重点从来不是格式，而是：对许多人们如今要求智能体产出的东西，Markdown 那种线性、无色、静止的形状会<em>主动遮蔽内容</em>，而 HTML 解除了这层束缚。<b>本技能是识别，而非反射。</b></p>
+      <p lang="en">It isn't "always answer in HTML." The point was never the format; it's that for many things people now ask agents to produce, markdown's linear, colorless, static shape <em>actively obscures the content</em>, while HTML lifts that constraint. <b>This skill is recognition, not reflex.</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- 配得上被读 -->
+<section class="qualities">
+  <h2 lang="zh">配得上被读</h2>
+  <h2 lang="en">Earning the read</h2>
+  <p class="sub" lang="zh">无论由哪几面镜头构建，每个产物都守住下面这一小组品质。它们不是官僚主义——每一条都是「你只会略读的文档」与「你会真正阅读的文档」之间的分水岭。</p>
+  <p class="sub" lang="en">Whichever lenses build it, every artifact holds to this small set of qualities. They aren't bureaucracy — each one is the watershed between "a document you'd only skim" and "one you'd actually read."</p>
+  <div class="q-list">
+    <div class="q-item"><span class="n">01</span><span class="t"><b lang="zh">单个自包含文件</b><b lang="en">A single self-contained file</b><span lang="zh">无构建步骤；CSS、JS、SVG 全在一个 <code>.html</code> 里，直接在浏览器打开。</span><span lang="en">No build step; CSS, JS, and SVG all in one <code>.html</code>, opens straight in a browser.</span></span></div>
+    <div class="q-item"><span class="n">02</span><span class="t"><b lang="zh">离线可用</b><b lang="en">Works offline</b><span lang="zh">查看时不依赖网络请求。</span><span lang="en">No network requests needed to view it.</span></span></div>
+    <div class="q-item"><span class="n">03</span><span class="t"><b lang="zh">移动端能存活</b><b lang="en">Survives on mobile</b><span lang="zh">含 viewport，窄屏不塌。</span><span lang="en">Has a viewport; doesn't collapse on a narrow screen.</span></span></div>
+    <div class="q-item"><span class="n">04</span><span class="t"><b lang="zh">真实布局，而非堆叠标题</b><b lang="en">Real layout, not stacked headings</b><span lang="zh">比较就分列，时间轴就画时间轴，差异就渲染差异。</span><span lang="en">A comparison gets columns, a timeline gets drawn, a diff gets rendered.</span></span></div>
+    <div class="q-item"><span class="n">05</span><span class="t"><b lang="zh">五秒内可读</b><b lang="en">Readable in five seconds</b><span lang="zh">标题、一句框架、然后是实质。立刻知道自己在看什么。</span><span lang="en">Title, one framing line, then the substance. You know what you're looking at at once.</span></span></div>
+    <div class="q-item"><span class="n">06</span><span class="t"><b lang="zh">默认克制</b><b lang="en">Restraint by default</b><span lang="zh">平静的排版，色彩只在承载意义处出现。</span><span lang="en">Calm typography; color only where it carries meaning.</span></span></div>
+    <div class="q-item"><span class="n">07</span><span class="t"><b lang="zh">编辑器导出回文本</b><b lang="en">Editors export back to text</b><span lang="zh">不可妥协。以「复制 / 下载」收尾，合上闭环。</span><span lang="en">Non-negotiable. End with copy / download to close the loop.</span></span></div>
+  </div>
+</section>
+
+<!-- 用起来 -->
+<section class="use">
+  <h2 lang="zh">用起来</h2>
+  <h2 lang="en">Put it to use</h2>
+  <div class="struct">
+    <pre><b>thariq-html-output-skills/</b>
+├── SKILL.md       <span class="c"><span lang="zh"># 识别测试、九面镜头、组合、通用品质</span><span lang="en"># recognition test, nine lenses, composition, universal qualities</span></span>
+└── references/    <span class="c"><span lang="zh"># 各文件以 Thariq 的原句开头</span><span lang="en"># each file opens with Thariq's own line</span></span>
+    ├── exploration-and-planning.md
+    ├── code-review-and-understanding.md
+    ├── design.md
+    ├── prototyping.md
+    ├── illustrations-and-diagrams.md
+    ├── decks.md
+    ├── research-and-learning.md
+    ├── reports.md
+    └── custom-editing-interfaces.md</pre>
+  </div>
+  <div class="two">
+    <div class="card">
+      <div class="t">Claude Code</div>
+      <h3 lang="zh">放入技能目录</h3>
+      <h3 lang="en">Drop it in your skills folder</h3>
+      <ol lang="zh">
+        <li>克隆仓库。</li>
+        <li>把目录复制进技能目录，<code>SKILL.md</code> 触发时始终加载，参考文件按镜头按需引入。</li>
+      </ol>
+      <ol lang="en">
+        <li>Clone the repo.</li>
+        <li>Copy the directory into your skills folder; <code>SKILL.md</code> always loads on trigger, references are pulled in by lens as needed.</li>
+      </ol>
+<pre>cp -r thariq-html-output-skills \
+  ~/.claude/skills/thariq-html-output</pre>
+    </div>
+    <div class="card">
+      <div class="t" lang="zh">小模型 / 子智能体</div>
+      <div class="t" lang="en">Small model / subagent</div>
+      <h3 lang="zh">自足交接</h3>
+      <h3 lang="en">Self-sufficient handoff</h3>
+      <ul lang="zh">
+        <li>路由给子任务时，打包三样东西即可无额外上下文构建：</li>
+        <li>(a) 用户原始请求；</li>
+        <li>(b) <code>SKILL.md</code> 的「配得上被读」规则；</li>
+        <li>(c) 每个被点名参考文件的全文。</li>
+      </ul>
+      <ul lang="en">
+        <li>When routing to a subtask, package three things and it builds with no extra context:</li>
+        <li>(a) the user's original request;</li>
+        <li>(b) the "earning the read" rules from <code>SKILL.md</code>;</li>
+        <li>(c) the full text of each named reference.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- 页脚 -->
+<footer>
+  <div class="wrap">
+    <span lang="zh">缘起自 Thariq Shihipar《HTML 的惊人有效性》· 识别测试、组合与通用品质，是其精神下的延伸 · MIT</span>
+    <span lang="en">Grew out of Thariq Shihipar's <em>The Unreasonable Effectiveness of HTML</em> · the recognition test, composition, and universal qualities are extensions in its spirit · MIT</span>
+    <span class="links">
+      <a href="SKILL.md">SKILL.md</a>
+      <a href="SKILL.zh.md"><span lang="zh">中文版</span><span lang="en">SKILL (中文)</span></a>
+      <a href="https://thariqs.github.io/html-effectiveness/"><span lang="zh">Thariq 原站</span><span lang="en">Thariq's site</span></a>
+    </span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var body = document.body;
+  var root = document.documentElement;
+  function apply(lang) {
+    body.dataset.lang = lang;
+    root.lang = lang === 'en' ? 'en' : 'zh-Hans';
+  }
+  try {
+    var saved = localStorage.getItem('lang');
+    if (saved === 'en' || saved === 'zh') apply(saved);
+  } catch (e) {}
+  document.querySelectorAll('[data-toggle-lang]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      var next = body.dataset.lang === 'en' ? 'zh' : 'en';
+      apply(next);
+      try { localStorage.setItem('lang', next); } catch (e) {}
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
