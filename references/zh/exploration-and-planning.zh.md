@@ -13,6 +13,16 @@
 这面镜头里住着两个时刻：*决定之前*（铺开、比较）与*决定之后*（一份你交接出去的计划）。两者
 都关乎让某个形状变得可见——选择的形状，或变更的形状。
 
+## 直接入口 — 最近的原作示例
+
+| 示例 | 何时使用 | 主导形态 | 关键读者动作 |
+|---|---|---|---|
+| [三种代码方案](../original-examples/01-exploration-code-approaches.html) · [在线](https://thariqs.github.io/html-effectiveness/01-exploration-code-approaches.html) | 并排比较 2–4 个具体解法 | 三列，内部结构完全一致，硬性指标强制推荐 | 比较 — 目光横向扫过各列 |
+| [实施计划](../original-examples/16-implementation-plan.html) · [在线](https://thariqs.github.io/html-effectiveness/16-implementation-plan.html) | 交接一个需要时间轴、图表和风险表的决定 | 里程碑条 + 数据流 SVG + 风险表 + 注释式片段 | 跟随 — 读者按阶段依次推进 |
+| [视觉设计方向](../original-examples/02-exploration-visual-designs.html) · [在线](https://thariqs.github.io/html-effectiveness/02-exploration-visual-designs.html) | 渲染 3–4 个设计选项以便直接指出偏好 | 并排实时渲染的选项，而非描述性文字 | 比较 + 试验 — 对渲染出的东西作出反应，而非想象它 |
+
+观察最接近示例的空间关系和信息层级；按本次材料重新设计，而非复制其外壳。
+
 ## Thariq 的三个 demo
 
 - **三种代码方案** ——「并排比较解决同一问题的三种方式，把权衡就地标注出来。」

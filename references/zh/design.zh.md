@@ -11,6 +11,15 @@
 谈论设计最诚实的格式，就是设计最终交付所用的那个媒介。把东西渲染成它自己，绝不要渲染成它的
 截图或对它的描述。
 
+## 直接入口 — 最近的原作示例
+
+| 示例 | 何时使用 | 主导形态 | 关键读者动作 |
+|---|---|---|---|
+| [活性设计系统](../original-examples/05-design-system.html) · [在线](https://thariqs.github.io/html-effectiveness/05-design-system.html) | 从真实代码库取出令牌并呈现供参考和复用 | 颜色色样、字体样本、间距标记——每个渲染成它自己，配复制按钮 | 定位 + 调整 — 找到令牌，复制值，喂回下一步 |
+| [组件变体](../original-examples/06-component-variants.html) · [在线](https://thariqs.github.io/html-effectiveness/06-component-variants.html) | 在发布或撰写规格前审阅一个组件的全部状态 | 每种尺寸 × 意图 × 状态的网格，每个变体下方展示对应 props | 比较 — 横向扫过行列，发现遗漏的状态 |
+
+观察最接近示例的空间关系和信息层级；按本次材料重新设计，而非复制其外壳。
+
 ## Thariq 的两个 demo
 
 - **活性设计系统** ——「从仓库里取出的颜色、字号阶梯和间距令牌，渲染成你可以直接复制的色样。」

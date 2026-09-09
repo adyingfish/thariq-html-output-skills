@@ -9,6 +9,15 @@
 
 这是用于*教学*的镜头——把一个主题变成读者可以非线性浏览的东西，而非从头读到尾。
 
+## 直接入口 — 最近的原作示例
+
+| 示例 | 何时使用 | 主导形态 | 关键读者动作 |
+|---|---|---|---|
+| [某功能如何运作](../original-examples/14-research-feature-explainer.html) · [在线](https://thariqs.github.io/html-effectiveness/14-research-feature-explainer.html) | 解释代码库中某个功能的工作原理 | TL;DR 框 → 可折叠生命周期步骤 → 选项卡式代码片段 → FAQ | 定位 — 只展开你需要的阶段或问题 |
+| [概念讲解器](../original-examples/15-research-concept-explainer.html) · [在线](https://thariqs.github.io/html-effectiveness/15-research-concept-explainer.html) | 教授空间性或状态性概念（哈希、分片、调度、队列） | 活性交互演示作为核心解释，比较表，旁注词汇表 | 试验 — 改变参数，观察后果；不要跳过交互元素 |
+
+这两个示例都是学习场景，却允许完全不同的主导形态。功能讲解器组织的是导航；概念讲解器围绕的是活性机制。让概念的性质决定哪种形状适用——空间机制适合演示；代码生命周期适合可折叠路径。选择结构前，先观察每个示例的信息分层和读者动作。
+
 ## Thariq 的两个 demo
 
 - **某功能如何运作** ——「『解释这个仓库里的限速』——一个 TL;DR 框、可折叠的请求路径步骤、

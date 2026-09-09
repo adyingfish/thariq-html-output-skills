@@ -10,6 +10,15 @@
 不要退回到 ASCII，或「想象有一张流程图……」这样的散文。把它画出来。产出的是用户可手动编辑、
 可复制出去的矢量图。
 
+## 直接入口 — 最近的原作示例
+
+| 示例 | 何时使用 | 主导形态 | 关键读者动作 |
+|---|---|---|---|
+| [SVG 配图集](../original-examples/10-svg-illustrations.html) · [在线](https://thariqs.github.io/html-effectiveness/10-svg-illustrations.html) | 为一篇文章或文档制作一组图 | 每张一个带图注的 `<figure>`，整套视觉语言一致，每图一个"复制 SVG"按钮 | 定位 — 找到需要的图，复制到目标文档 |
+| [注释式流程图](../original-examples/13-flowchart-diagram.html) · [在线](https://thariqs.github.io/html-effectiveness/13-flowchart-diagram.html) | 把一个每步都有值得展开的细节的流程可视化 | 内联 SVG 流程图；点击节点打开侧面板，显示运行内容、耗时、失败路径 | 定位 + 追踪 — 在图上找到步骤，展开查看细节 |
+
+观察示例如何将图（导航）与细节面板（内容）分开；从这个结构出发设计你自己的信息分层，而非把所有细节都塞到节点上。
+
 ## Thariq 的两个 demo
 
 - **SVG 配图集** ——「一篇博文的各张图，内联绘制，好让它们能被逐一微调和复制出来。」

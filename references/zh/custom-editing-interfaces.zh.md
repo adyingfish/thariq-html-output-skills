@@ -13,6 +13,16 @@
 这是这种格式最具特色的用法。文本框是某些任务的错误形状——给 30 个工单分优先级、调一个正则、
 重排一道流程。为那一个任务，构建一个专门打造的单文件编辑器。
 
+## 直接入口 — 最近的原作示例
+
+| 示例 | 何时使用 | 主导形态 | 关键读者动作 |
+|---|---|---|---|
+| [工单分流看板](../original-examples/18-editor-triage-board.html) · [在线](https://thariqs.github.io/html-effectiveness/18-editor-triage-board.html) | 把一批工单分配到优先级桶里 | 四列（当前/下一步/稍后/砍掉），拖拽，每桶计数，"复制为 Markdown"导出 | 调整 — 拖到感觉对，复制排序结果 |
+| [功能开关编辑器](../original-examples/19-editor-feature-flags.html) · [在线](https://thariqs.github.io/html-effectiveness/19-editor-feature-flags.html) | 编辑一组有依赖关系的功能开关 | 分组开关 + 依赖警告 + 只导出改动键的"复制差异"按钮 | 调整 — 切换，看警告，只导出变化的部分 |
+| [提示词调参器](../original-examples/20-editor-prompt-tuner.html) · [在线](https://thariqs.github.io/html-effectiveness/20-editor-prompt-tuner.html) | 针对多个样本输入迭代提示词模板 | 左侧可编辑模板，右侧三个实时预览随打字更新 | 试验 + 调整 — 编辑模板，观察三个样本同步更新 |
+
+不可妥协的导出，正是编辑器与玩具的分水岭。先把导出加上，再加任何其他功能。
+
 ## 不可妥协的规则
 
 **每个编辑器都以一次导出收尾。** 「复制为 Markdown / JSON / 提示词」「下载为 CSV」——无论哪种，

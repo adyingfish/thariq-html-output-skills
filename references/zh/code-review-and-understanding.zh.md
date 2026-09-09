@@ -10,6 +10,16 @@
 
 按代码本身希望被阅读的方式来渲染它，而不是一面 `<pre>` 文字墙、每段之间夹着散文。
 
+## 直接入口 — 最近的原作示例
+
+| 示例 | 何时使用 | 主导形态 | 关键读者动作 |
+|---|---|---|---|
+| [注释式拉取请求](../original-examples/03-code-review-pr.html) · [在线](https://thariqs.github.io/html-effectiveness/03-code-review-pr.html) | 审查某些行需要评注的差异 | 带样式的差异 + 旁注 + 严重程度标签 + 跳转链接 | 定位 — 找到注释区域，在代码旁阅读评注 |
+| [给审查者的 PR 说明](../original-examples/17-pr-writeup.html) · [在线](https://thariqs.github.io/html-effectiveness/17-pr-writeup.html) | 写出一次变更的作者侧说明 | 动机 → 前后对比 → 逐文件巡览 → 聚焦说明 | 跟随 — 按作者意图的顺序走完变更 |
+| [模块地图](../original-examples/04-code-understanding.html) · [在线](https://thariqs.github.io/html-effectiveness/04-code-understanding.html) | 让读者快速了解陌生包的结构 | 方框与箭头 SVG + 热路径高亮 + 每模块卡片 | 定位 — 从适合自己用途的入口点出发，导航到细节 |
+
+观察最接近示例的空间关系和信息层级；按本次材料重新设计，而非复制其外壳。
+
 ## Thariq 的三个 demo
 
 - **注释式拉取请求** ——「一份带旁注、严重程度标签和跳转链接的差异——比滚动终端更易扫读。」

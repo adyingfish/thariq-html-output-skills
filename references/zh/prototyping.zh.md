@@ -10,6 +10,15 @@
 这是散文败得最惨的一面镜头。你写不出一条缓动曲线；你得让它动起来。把真东西做出来，聚焦于
 所讨论的那一个交互。
 
+## 直接入口 — 最近的原作示例
+
+| 示例 | 何时使用 | 主导形态 | 关键读者动作 |
+|---|---|---|---|
+| [动效沙盒](../original-examples/07-prototype-animation.html) · [在线](https://thariqs.github.io/html-effectiveness/07-prototype-animation.html) | 在接入真实代码前把过渡调好 | 被动画对象居中放大；时长、缓动、延迟的滑块；实时 CSS 输出与复制按钮 | 试验 — 拖动滑块，观察结果；调好后复制 |
+| [可点击流程](../original-examples/08-prototype-interaction.html) · [在线](https://thariqs.github.io/html-effectiveness/08-prototype-interaction.html) | 在构建前检查多屏交互是否感觉对 | 四五个相连的屏幕，足够感受流程的保真度，可前进/后退的点击目标 | 跟随 + 试验 — 点击走过交互，判断是否符合预期 |
+
+动效沙盒适合活性演示；可点击流程适合相连的屏幕。用最简单的形式让读者*感受*交互，而非描述它。
+
 ## Thariq 的两个 demo
 
 - **动效沙盒** ——「把过渡单独拿出来，配上时长和缓动的滑块，让你在接线之前先调好它。」
