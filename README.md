@@ -3,9 +3,10 @@
 **English** | [简体中文](README.zh.md)
 
 A Claude skill that grew out of [Thariq Shihipar's *The Unreasonable
-Effectiveness of HTML*](https://thariqs.github.io/html-effectiveness/) and tries
-to carry the part of it that's easiest to lose: the **judgment** — when HTML
-helps, and when to leave it alone.
+Effectiveness of HTML*](https://claude.com/blog/using-claude-code-the-unreasonable-effectiveness-of-html)
+(and its [companion example site](https://thariqs.github.io/html-effectiveness/))
+and tries to carry the part of it that's easiest to lose: the **judgment** —
+when HTML helps, and when to leave it alone.
 
 Thariq worried, in the post itself, that someone would turn it into a mechanical
 "/html skill." That worry is the design brief. A skill that reflexively
@@ -43,12 +44,17 @@ worry it ends on:
    saw, not as a routing table you match one row of. It is equally explicit
    about the carve-out: where markdown is the better medium, stay there.
 
-2. **Categories are lenses that compose.** `SKILL.md` instructs the model to
-   *name every lens that applies* and read each named reference, letting the
-   dominant lens set the skeleton and the others contribute patterns inside it.
-   The references are written to stack, and several point at each other
-   (the module map borrows from Illustrations; the post-mortem borrows from
-   Research & Learning).
+2. **Categories are lenses that compose — chosen by the reader's action.**
+   `SKILL.md` first asks what the reader must *do* with the artifact — compare,
+   locate, track, try, adjust, or follow — and lets that action pick the
+   dominant form. Only then does it name the lenses that support it, read each
+   named reference, and open the closest original example through that
+   reference's Direct-entry table. The dominant lens sets the skeleton; the
+   others contribute patterns inside it. The references are written to stack,
+   and several point at each other (the module map borrows from Illustrations;
+   the post-mortem borrows from Research & Learning). A cross-cutting *Unknowns*
+   reference covers the cases where an unresolved preference or assumption
+   should be surfaced before building.
 
 3. **Trust the model.** The deepest reading of the post is to *not* turn it into
    a rulebook. So the references favor a few load-bearing points and Thariq's
@@ -65,9 +71,10 @@ worry it ends on:
 
 ```
 thariq-html-output-skills/
-├── SKILL.md                                    # recognition test, 9 lenses, composition, universal qualities
+├── SKILL.md                                # recognition test, reader-action table, 9 lenses, composition, universal qualities
+├── SKILL.zh.md                             # same, in Simplified Chinese
 └── references/
-    ├── exploration-and-planning.md
+    ├── exploration-and-planning.md         # each lens reference opens with a "Direct entry" table
     ├── code-review-and-understanding.md
     ├── design.md
     ├── prototyping.md
@@ -75,11 +82,20 @@ thariq-html-output-skills/
     ├── decks.md
     ├── research-and-learning.md
     ├── reports.md
-    └── custom-editing-interfaces.md
+    ├── custom-editing-interfaces.md
+    ├── unknowns.md                         # cross-cutting: surface unresolved preferences and assumptions
+    ├── source-and-examples.md              # attribution map, index of the 31 originals, snapshot manifest
+    ├── zh/                                 # Simplified Chinese versions of every reference (*.zh.md)
+    └── original-examples/                  # Thariq's 31 example files, verbatim (Apache-2.0)
+        ├── 01-exploration-code-approaches.html … 20-editor-prompt-tuner.html
+        ├── unknowns/                       # 01-blindspot-pass.html … 11-change-quiz.html
+        └── LICENSE
 ```
 
 `SKILL.md` is always in context once the skill triggers. References are pulled
-in by the lenses a request looks through — usually one, sometimes several.
+in by the lenses a request looks through — usually one, sometimes several. The
+original examples are opened one or two at a time, through each reference's
+Direct-entry table — never the whole gallery.
 
 ## Running on a smaller model / subagent
 
@@ -92,10 +108,15 @@ to build the artifact with no further context — see "Where the file goes" in
 
 ## Credits & license
 
-Grew out of Thariq Shihipar's *The Unreasonable Effectiveness of HTML* and its
-[companion site](https://thariqs.github.io/html-effectiveness/). The nine
-categories and the framing are his; the recognition test, the composition model,
-and the universal qualities are the extensions — an attempt to carry his
-judgment, not just his examples.
+Grew out of Thariq Shihipar's [*The Unreasonable Effectiveness of HTML*](https://claude.com/blog/using-claude-code-the-unreasonable-effectiveness-of-html)
+and its [companion site](https://thariqs.github.io/html-effectiveness/). The nine
+categories, their demo descriptions, the skim-vs-read framing, and the example
+gallery are his. Formalising those into a recognition test, a composition model,
+three obligations, a reader-action table, and the Unknowns cross-reference is the
+skill's extension — an attempt to carry his judgment, not just his examples.
 
-MIT
+The 31 example files under `references/original-examples/` are copied verbatim
+from [ThariqS/html-effectiveness](https://github.com/ThariqS/html-effectiveness)
+at commit `1787245` and remain under their own
+[Apache License 2.0](references/original-examples/LICENSE), which is included
+alongside them. Everything else in this repository is MIT.
