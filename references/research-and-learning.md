@@ -7,6 +7,15 @@
 The lens for *teaching* — turning a topic into something the reader can navigate
 non-linearly instead of reading front to back.
 
+## Direct entry — closest original examples
+
+| Example | When to use it | Dominant form | Key reader action |
+|---|---|---|---|
+| [How a feature works](original-examples/14-research-feature-explainer.html) · [live](https://thariqs.github.io/html-effectiveness/14-research-feature-explainer.html) | Explaining how a feature in a codebase works | TL;DR box → collapsible lifecycle steps → tabbed code snippets → FAQ | Locate — expand only the phase or question you need |
+| [Concept explainer](original-examples/15-research-concept-explainer.html) · [live](https://thariqs.github.io/html-effectiveness/15-research-concept-explainer.html) | Teaching a spatial or stateful concept (hashing, scheduling, queuing) | Live interactive demo as the core explanation, comparison table, margin glossary | Try — change a parameter and observe the consequence; do not skip the interactive element |
+
+Note: these two examples are both learning scenarios but arrive at completely different dominant forms. The feature explainer organises navigation; the concept explainer is built around a live mechanism. Let the nature of the concept decide which shape applies — a spatial mechanism earns the demo; a code lifecycle earns the collapsible path. Inspect each example's information layering and reader actions before choosing your structure.
+
 ## Thariq's two demos
 
 - **How a feature works** — "'Explain rate limiting in this repo' — TL;DR box,

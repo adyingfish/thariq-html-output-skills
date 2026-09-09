@@ -8,6 +8,16 @@
 Render the code the way it wants to be read, not as a wall of `<pre>` with
 prose between every chunk.
 
+## Direct entry — closest original examples
+
+| Example | When to use it | Dominant form | Key reader action |
+|---|---|---|---|
+| [Annotated pull request](original-examples/03-code-review-pr.html) · [live](https://thariqs.github.io/html-effectiveness/03-code-review-pr.html) | Reviewing a diff where specific lines need commentary | Styled diff with margin notes, severity tags, jump links | Locate — find the annotated regions, read commentary beside the code |
+| [PR writeup for reviewers](original-examples/17-pr-writeup.html) · [live](https://thariqs.github.io/html-effectiveness/17-pr-writeup.html) | Writing the author-side description of a change | Motivation → before/after → file-by-file tour → focus section | Follow — step through the change in the author's intended order |
+| [Module map](original-examples/04-code-understanding.html) · [live](https://thariqs.github.io/html-effectiveness/04-code-understanding.html) | Orienting a reader to an unfamiliar package | Boxes-and-arrows SVG + hot path highlight + per-module cards | Locate — start at the entry point for your use case, navigate to detail |
+
+Inspect the spatial relationships and information hierarchy of the closest example; design around your current material rather than copying its shell.
+
 ## Thariq's three demos
 
 - **Annotated pull request** — "A diff rendered with margin notes, severity tags

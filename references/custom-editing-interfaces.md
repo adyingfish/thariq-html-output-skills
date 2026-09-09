@@ -10,6 +10,16 @@ The most distinctive use of the format. A text box is the wrong shape for some
 tasks — triaging 30 tickets, tuning a regex, reordering a flow. Build a
 single-file editor purpose-built for the one task.
 
+## Direct entry — closest original examples
+
+| Example | When to use it | Dominant form | Key reader action |
+|---|---|---|---|
+| [Ticket triage board](original-examples/18-editor-triage-board.html) · [live](https://thariqs.github.io/html-effectiveness/18-editor-triage-board.html) | Sorting a batch of tickets into priority buckets | Four columns (Now / Next / Later / Cut) with drag-and-drop, tally per bucket, "Copy as markdown" export | Adjust — drag until the cut feels right, copy the ordering out |
+| [Feature flag editor](original-examples/19-editor-feature-flags.html) · [live](https://thariqs.github.io/html-effectiveness/19-editor-feature-flags.html) | Editing a set of feature toggles where some have dependencies | Grouped toggles with dependency warnings, "copy diff" for changed keys only | Adjust — toggle, watch the warnings, export only the delta |
+| [Prompt tuner](original-examples/20-editor-prompt-tuner.html) · [live](https://thariqs.github.io/html-effectiveness/20-editor-prompt-tuner.html) | Iterating on a prompt template against multiple sample inputs | Editable template left, three live previews right re-rendering as you type | Try + Adjust — edit the template and watch all three samples update in real time |
+
+The non-negotiable export is what distinguishes an editor from a toy. Add the export *before* any other feature.
+
 ## The non-negotiable rule
 
 **Every editor ends with an export.** "Copy as markdown / JSON / prompt,"

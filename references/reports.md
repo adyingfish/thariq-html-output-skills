@@ -7,6 +7,15 @@
 Recurring documents get read when they're scannable and ignored when they're
 walls of text. Structure and color are what flip that.
 
+## Direct entry — closest original examples
+
+| Example | When to use it | Dominant form | Key reader action |
+|---|---|---|---|
+| [Weekly status](original-examples/11-status-report.html) · [live](https://thariqs.github.io/html-effectiveness/11-status-report.html) | Recurring team status that needs to be read in 90 seconds on Monday morning | Three visually distinct columns (shipped / in flight / blocked), one small chart, a separated "Asks" section | Locate — scan columns to find the status, spot the chart, act on the asks |
+| [Incident timeline](original-examples/12-incident-report.html) · [live](https://thariqs.github.io/html-effectiveness/12-incident-report.html) | Post-mortem with a minute-by-minute sequence and follow-up commitments | Vertical timeline (timestamps one side, events other side) + log excerpts at relevant timestamps + action-item checklist | Track — follow the timeline to see pace and clusters, locate the root cause, commit on the action items |
+
+Note: the post-mortem naturally composes with Research & Learning when the root cause needs real system explanation for an audience that was not watching the incident.
+
 ## Thariq's two demos
 
 - **Weekly status** — "What shipped, what slipped, and a small chart — formatted

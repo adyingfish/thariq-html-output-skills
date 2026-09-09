@@ -8,6 +8,15 @@
 The honest format for talking about design is the medium design ships in. Render
 the thing as itself, never as a screenshot or a description of it.
 
+## Direct entry — closest original examples
+
+| Example | When to use it | Dominant form | Key reader action |
+|---|---|---|---|
+| [Living design system](original-examples/05-design-system.html) · [live](https://thariqs.github.io/html-effectiveness/05-design-system.html) | Pulling tokens from a real codebase and presenting them for reference and reuse | Color swatches, type specimens, spacing indicators — each rendered as itself with a copy button | Locate + Adjust — find the token, copy the value, feed it back |
+| [Component variants](original-examples/06-component-variants.html) · [live](https://thariqs.github.io/html-effectiveness/06-component-variants.html) | Reviewing all states of one component before shipping or spec-ing it | Grid of every size × intent × state, props shown under each variant | Compare — scan across rows and columns to catch missing states |
+
+Inspect the spatial relationships and information hierarchy of the closest example; design around your current material rather than copying its shell.
+
 ## Thariq's two demos
 
 - **Living design system** — "Colors, type scale and spacing tokens pulled from

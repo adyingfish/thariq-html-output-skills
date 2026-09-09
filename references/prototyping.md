@@ -8,6 +8,15 @@ This is the lens where prose fails hardest. You can't write an easing curve; you
 have to move it. Build the real thing, scoped to the one interaction in
 question.
 
+## Direct entry — closest original examples
+
+| Example | When to use it | Dominant form | Key reader action |
+|---|---|---|---|
+| [Animation sandbox](original-examples/07-prototype-animation.html) · [live](https://thariqs.github.io/html-effectiveness/07-prototype-animation.html) | Dialling in a transition before wiring it into real code | The animated object front and centre; sliders for duration, easing, delay; live CSS output with a copy button | Try — drag a slider and watch the result; copy when it feels right |
+| [Click-through flow](original-examples/08-prototype-interaction.html) · [live](https://thariqs.github.io/html-effectiveness/08-prototype-interaction.html) | Checking whether a multi-screen interaction feels correct before building | Four or so linked screens, enough fidelity to feel the flow, click targets that advance or go back | Follow + Try — tap through the interaction to judge whether it reads as intended |
+
+The animation sandbox earns a live demo; the click-through earns linked screens. Use the simplest form that lets the reader *feel* the interaction, not describe it.
+
 ## Thariq's two demos
 
 - **Animation sandbox** — "The transition in isolation with sliders for duration

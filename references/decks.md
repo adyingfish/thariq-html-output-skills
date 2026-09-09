@@ -8,6 +8,14 @@ For short presentations someone will narrate to a room. If the content is dense
 reference material the reader studies alone, a deck is the wrong lens — use
 Research & Learning instead.
 
+## Direct entry — closest original example
+
+| Example | When to use it | Dominant form | Key reader action |
+|---|---|---|---|
+| [Arrow-key slide deck](original-examples/09-slide-deck.html) · [live](https://thariqs.github.io/html-effectiveness/09-slide-deck.html) | Turning a Slack thread or design doc into a short presentation | One `<section>` per slide, full-viewport presenter view, arrow-key navigation, slide counter | Follow — arrow through slides in order; one idea per beat |
+
+The deck example keeps the substrate minimal: twenty lines of JS, no build step, light-on-dark. One idea per slide is the structural rule; the visual variety (chart, quote, code block) follows from content, not from a template.
+
 ## Thariq's demo
 
 - **Arrow-key slide deck** — "A short presentation as one HTML file. Left and

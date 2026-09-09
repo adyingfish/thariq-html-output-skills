@@ -7,6 +7,15 @@
 Don't fall back to ASCII or "imagine a flowchart that…" prose. Draw it. The
 output is vector art the user edits by hand and copies out.
 
+## Direct entry — closest original examples
+
+| Example | When to use it | Dominant form | Key reader action |
+|---|---|---|---|
+| [SVG figure sheet](original-examples/10-svg-illustrations.html) · [live](https://thariqs.github.io/html-effectiveness/10-svg-illustrations.html) | Producing a set of diagrams for a post or document | One `<figure>` per diagram, consistent visual language across the set, "copy SVG" per figure | Locate — find the figure you need, copy it out for the destination document |
+| [Annotated flowchart](original-examples/13-flowchart-diagram.html) · [live](https://thariqs.github.io/html-effectiveness/13-flowchart-diagram.html) | Visualising a process where each step has detail worth expanding | Flowchart as inline SVG; click a node to open a side panel with what runs there, timing, failure paths | Locate + Track — navigate the chart to find a step, expand it to see the detail |
+
+Inspect how the examples separate the chart (navigation) from the detail panel (content); design your own information layering from that structure rather than cram all detail onto the nodes.
+
 ## Thariq's two demos
 
 - **SVG figure sheet** — "The diagrams for a blog post, drawn inline so they can

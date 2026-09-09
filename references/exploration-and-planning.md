@@ -10,6 +10,16 @@ Two moments live in this lens: *before* the decision (fan out, compare) and
 *after* it (a plan you hand off). Both are about making a shape visible — the
 shape of a choice, or the shape of a change.
 
+## Direct entry — closest original examples
+
+| Example | When to use it | Dominant form | Key reader action |
+|---|---|---|---|
+| [Three code approaches](original-examples/01-exploration-code-approaches.html) · [live](https://thariqs.github.io/html-effectiveness/01-exploration-code-approaches.html) | Comparing 2–4 concrete solutions side by side | Three columns, identical internal structure, hard metrics | Compare — eye scans horizontally across columns |
+| [Implementation plan](original-examples/16-implementation-plan.html) · [live](https://thariqs.github.io/html-effectiveness/16-implementation-plan.html) | Handing off a decision that needs a timeline, diagram, and risk table | Milestones strip + data-flow SVG + risk table + annotated snippet | Follow — reader steps through phases in order |
+| [Visual design directions](original-examples/02-exploration-visual-designs.html) · [live](https://thariqs.github.io/html-effectiveness/02-exploration-visual-designs.html) | Rendering 3–4 design options so preferences can be pointed at | Live rendered options side by side, no description-only | Compare + Try — react to the rendered thing, not imagine it |
+
+Inspect the spatial relationships and information hierarchy of the closest example; design around your current material rather than copying its shell.
+
 ## Thariq's three demos
 
 - **Three code approaches** — "Side-by-side comparison of three ways to solve
