@@ -7,3 +7,6 @@
 
 # ai
 CLAUDE.local.md
+
+# local working directory (session artifacts, not checked in)
+local/
