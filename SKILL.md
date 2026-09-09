@@ -32,6 +32,17 @@ own words — "you don't need to do much to get an agent to do this." This skill
 tries to be the smallest scaffolding that preserves that, not a fortress of
 do's and don'ts.
 
+**What comes from where.** The nine categories and their demo descriptions, the
+"skim it vs. actually read it" framing, single-file self-containment, and "always
+end with an export button" are Thariq's, from the article. The example gallery —
+20 originals plus the 11 in *Know your unknowns* — is his too, and is snapshotted
+verbatim under `references/original-examples/`. Formalising those observations
+into a recognition test, a composition model, and three obligations, plus the
+reader-action table, the implicit trigger rules, the self-check, the Direct-entry
+tables, and folding the Unknowns gallery in as a cross-cutting reference, are
+skill-layer additions. `references/source-and-examples.md` holds the full
+attribution map and the index of all 31 examples.
+
 ## The recognition test
 
 Before anything else, ask the one question the whole post turns on:
@@ -63,10 +74,27 @@ or more shapes, and each shape is a lens you look through while building.
 | Reports | status updates, post-mortems, incident timelines | `references/reports.md` |
 | Custom Editing Interfaces | a throwaway editor for a task awkward to type into a text box | `references/custom-editing-interfaces.md` |
 
+## Let the reader's action determine the artifact's form
+
+Before naming lenses, identify what the reader must *do* with this artifact:
+
+| Reader action | Dominant form |
+|---|---|
+| **Compare** — weigh options side by side | Columns or a comparison table the eye scans across |
+| **Locate** — find one fact among many | Filterable / searchable index with dimensions as entry points |
+| **Track** — follow a path or event sequence | Flow with labeled nodes, directed edges, or a timeline |
+| **Try** — interact with a mechanism to understand it | Live controls where changing a parameter produces a visible consequence |
+| **Adjust** — edit configuration and carry it forward | Editable inputs with a live preview and an export that captures the state |
+| **Follow** — absorb a narrative at a set pace | Deck or paged story with deliberate rhythm and one idea per beat |
+
+Pick the form that puts the action front and centre. **Self-check:** is the action the reader must perform the first thing visible on the page? If the opening screen shows headings and paragraphs rather than that action itself, verify whether the dominant form was chosen correctly — or whether a document layout is genuinely the most direct expression for this material.
+
+**Implicit trigger rules.** Some requests name no form but imply one: "which is better / faster / safer" → compare; "explain how this code works" or "trace what happens when…" → track or locate; "I haven't decided yet" → try or adjust; "walk me through" → follow.
+
 ## Composition is the default, not the exception
 
-This is the heart of the skill, and it is Thariq's own design. His
-*implementation plan* demo is described as:
+This is the heart of the skill, and it grows straight out of Thariq's own
+*implementation plan* demo, which he describes as:
 
 > "Milestones on a timeline, a data-flow diagram, inline mockups, the risky
 > code, and a risk table — the plan you hand off."
@@ -74,17 +102,13 @@ This is the heart of the skill, and it is Thariq's own design. His
 That single artifact is **Exploration + Illustrations + Design + Code Review
 at once.** The lenses compose. So:
 
-1. **Name every lens that applies.** Don't force the request into one category.
-   Most artifacts need one; the richest need three or four.
-2. **Read each named reference.** They're short and they're written to stack.
-3. **Let the dominant lens set the skeleton**, and let the others contribute
-   their patterns inside it. The implementation plan above is Exploration's
-   skeleton (problem → options resolved → hand-off) with a diagram from
-   Illustrations, mockups from Design, and an annotated snippet from Code Review
-   embedded in it.
+1. **Identify the dominant reader action first** (see table above), then name the lenses that support it.
+2. **Read each named reference.** They're short and they're written to stack. Inspect the closest original example for that lens — learn from its spatial relationships, hierarchy, and reader actions, then design around your material rather than copying its shell.
+3. **Let the dominant lens set the skeleton**, and let the others contribute their patterns inside it. The implementation plan above is Exploration's skeleton (problem → options resolved → hand-off) with a diagram from Illustrations, mockups from Design, and an annotated snippet from Code Review embedded in it.
 
-When in doubt, look through more lenses, not fewer. Composition is how Thariq's
-best examples got their density.
+Compose additional lenses when they help the task — and stop when they don't. More lenses does not mean a richer artifact; one that accumulates every lens collapses back into a general-purpose report.
+
+When there are unresolved preferences, assumptions, or knowledge gaps that affect the work, consult `references/unknowns.md` for an appropriate exploration, prototype, clarification, or understanding check. Carry useful decisions and unresolved questions into the next step; use answers already given and avoid unnecessary gates.
 
 ## What every artifact owes the reader
 
