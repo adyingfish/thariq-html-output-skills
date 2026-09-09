@@ -1,0 +1,23 @@
+# 统一换行符：仓库内一律存 LF，检出时也保持 LF。
+# 这样无论 core.autocrlf 怎么设，WSL / Windows / macOS 检出的内容一致，
+# 也不会再出现 "LF will be replaced by CRLF" 警告。
+* text=auto eol=lf
+
+# 文本文件显式声明（便于 diff 和阅读）
+*.md   text eol=lf
+*.html text eol=lf
+*.css  text eol=lf
+*.js   text eol=lf
+*.json text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+
+# 二进制文件不做任何换行转换
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.webp binary
+*.ico  binary
+*.woff binary
+*.woff2 binary
