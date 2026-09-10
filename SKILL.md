@@ -1,6 +1,6 @@
 ---
 name: thariq-html-output
-version: 0.1.0
+version: 0.2.0-rc
 description: >-
   Produce a single self-contained HTML artifact instead of a markdown document
   whenever the thing being asked for has a *shape* that linear text would flatten:
