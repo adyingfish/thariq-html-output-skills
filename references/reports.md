@@ -57,3 +57,9 @@ Note: the post-mortem is the natural composite in this lens — its timeline is 
 Report, but its root-cause section is really Research & Learning (explaining the
 system to someone who wasn't there). Read that reference too when the cause needs
 real explaining.
+
+---
+
+## When to bring in the Unknowns gallery
+
+If the work has unresolved preferences, assumptions, or knowledge gaps — pre-implementation options still open, a choice the user has not yet made, or a hypothesis that needs testing — consult [`unknowns.md`](unknowns.md) for an appropriate exploration, prototype, clarification, or understanding check before building the final artifact.

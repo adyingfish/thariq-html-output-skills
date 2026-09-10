@@ -76,3 +76,9 @@ Note: these two examples are both learning scenarios but arrive at completely di
   <aside class="glossary"><dl><dt>arc</dt><dd>the span of ring a node owns.</dd></dl></aside>
 </main>
 ```
+
+---
+
+## When to bring in the Unknowns gallery
+
+If the work has unresolved preferences, assumptions, or knowledge gaps — pre-implementation options still open, a choice the user has not yet made, or a hypothesis that needs testing — consult [`unknowns.md`](unknowns.md) for an appropriate exploration, prototype, clarification, or understanding check before building the final artifact.

@@ -83,3 +83,9 @@ Inspect the spatial relationships and information hierarchy of the closest examp
   </section>
 </main>
 ```
+
+---
+
+## When to bring in the Unknowns gallery
+
+If the work has unresolved preferences, assumptions, or knowledge gaps — pre-implementation options still open, a choice the user has not yet made, or a hypothesis that needs testing — consult [`unknowns.md`](unknowns.md) for an appropriate exploration, prototype, clarification, or understanding check before building the final artifact.

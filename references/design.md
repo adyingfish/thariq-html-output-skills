@@ -56,3 +56,9 @@ A design-system artifact is worth saving (`design-system.html`) and feeding into
 every later artifact as the source of CSS variables. It's one-time work that
 keeps everything after it on-brand. Suggest it the first time a project with a
 real visual identity asks for HTML output.
+
+---
+
+## When to bring in the Unknowns gallery
+
+If the work has unresolved preferences, assumptions, or knowledge gaps — pre-implementation options still open, a choice the user has not yet made, or a hypothesis that needs testing — consult [`unknowns.md`](unknowns.md) for an appropriate exploration, prototype, clarification, or understanding check before building the final artifact.
