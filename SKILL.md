@@ -9,14 +9,15 @@ description: >-
   surface, a reference document navigated non-linearly, a slide deck, an
   explainer, a recurring report, or a one-off editor for a task that is awkward
   to describe in a text box. The test is Thariq Shihipar's: would the reader
-  *skim* a markdown version but *actually read* an HTML one? Trigger on requests
-  for plans, comparisons, code reviews, PR writeups, module walkthroughs, design
-  systems, component sheets, prototypes, animations, diagrams, flowcharts, decks,
-  slides, explainers, concept walkthroughs, status updates, post-mortems,
-  incident timelines, or throwaway editors / tools — even when the user never
-  says "HTML" or "artifact." Stay in markdown only for short conversational
-  replies, code-only answers, terminal/command answers, and content that is
-  genuinely just a few sentences.
+  *skim* a markdown version but *actually read* an HTML one? The artifact's form
+  then follows what the reader must do with it — compare, locate, track, try,
+  adjust, or follow. Trigger on requests for plans, comparisons, code reviews,
+  PR writeups, module walkthroughs, design systems, component sheets, prototypes,
+  animations, diagrams, flowcharts, decks, slides, explainers, concept
+  walkthroughs, status updates, post-mortems, incident timelines, or throwaway
+  editors / tools — even when the user never says "HTML" or "artifact." Stay in
+  markdown only for short conversational replies, code-only answers,
+  terminal/command answers, and content that is genuinely just a few sentences.
 ---
 
 # HTML output
